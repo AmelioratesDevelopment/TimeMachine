@@ -1,16 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-'''
-class Topic(models.Model):
-    top_name = models.CharField(max_length=264, unique=True)
+class UserProfileInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-class Webpage(models.Model):
-    category = models.ForeignKey(Topic)
-    name = models.CharField(max_length=264)
-    url = models.URLField()
-    
-    
+    # Add any additional attributes you want
+    personal_site = models.URLField(blank=True)
+    profile_image = models.ImageField(upload_to='profile_images',blank=True)
+
     def __str__(self):
-        return self.name
-'''
+        # Built-in attribute of django.contrib.auth.models.User !
+        return self.user.username
